@@ -7,6 +7,7 @@ pub struct Lexeme<'a> {
 
 impl<'a> Lexeme<'a> {
     pub fn new(body: Vec<Option<&(usize, char)>>) -> Lexeme<'a> {
+        //Join not work cuz option.
         let body = body.join("");
         let kind = Token::Identifier;
 
