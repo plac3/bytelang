@@ -1,0 +1,42 @@
+/*
+
+OOP Votes:
+    Yay: 0
+    Nay: 2
+
+Typing:
+    Strong: 1
+    Weak: 1
+
+Interesting Lang Features:
+    metaprogramming
+
+
+
+Details:
+    Intepreted
+    Static Typing
+
+Backend:
+    Stack-Based VM
+
+
+Syntax:
+    Curly Braces: 2 | 0
+*/
+
+/*
+
+function a(): int {
+
+}
+
+func main() -> int {
+
+}
+
+int main() {
+
+}
+
+*/
