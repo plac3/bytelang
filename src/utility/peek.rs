@@ -2,8 +2,7 @@
     Iterator that allows you to lookahead a certain number of times
 */
 
-//i'm suspicious that this type appears to have no conception of a lifetime associated with Iterator
-pub struct Peek<const N: usize, I: Iterator> {
+ pub struct Peek<const N: usize, I: Iterator> {
     iter: I,
     buffer: [Option<I::Item>; N] //buffer stores N lookaheads
 }
@@ -38,4 +37,42 @@ impl<const N: usize, I: Iterator> Iterator for Peek<N, I> {
     fn next(&mut self) -> Option<Self::Item> {
         self.consume()
     }
+}
+
+#[cfg(test)]
+pub mod tests {
+    use super::*;
+    
+    #[test]
+    fn peek() {
+        let string = String::from("hello");
+        let mut iter: Peek<3, _> = Peek::from(string.chars());
+
+        //get prefix by looking ahead 3
+        let prefix = |i: &Peek<3, _>| { 
+            (0..3)
+                .into_iter()
+                .map(|n| i.peek(n).unwrap())
+                .collect::<String>()
+        };
+
+        //prefix tests
+        assert_eq!(prefix(&iter), String::from("hel"));
+        assert_eq!(iter.next(), Some('h'));
+        assert_eq!(prefix(&iter), String::from("ell"));
+        assert_eq!(iter.next(), Some('e'));
+        assert_eq!(prefix(&iter), String::from("llo"));
+
+        //out of bounds peek
+        assert_eq!(iter.peek(4), None);
+
+        //exhaust peek
+        assert_eq!(iter.next(), Some('l'));
+        assert_eq!(iter.peek(3), None);
+
+        //exhaust underlying iter
+        assert_eq!(iter.next(), Some('l'));
+        assert_eq!(iter.next(), Some('o'));
+        assert_eq!(iter.next(), None);
+    } 
 }
