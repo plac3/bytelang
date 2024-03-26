@@ -126,5 +126,7 @@ mod tests {
         assert_eq!(tokens[3], Token::False);
         assert_eq!(tokens[4], Token::Number("123"));
         assert_eq!(tokens[5], Token::String("string"));
+
+        // i helpd guys - encryptal
     }
 }
