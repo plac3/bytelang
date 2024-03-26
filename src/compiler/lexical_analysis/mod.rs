@@ -9,17 +9,14 @@
 
 //mod
 pub mod token;
-pub mod lexeme;
 
 //pub use
 pub use token::Token;
-pub use lexeme::Lexeme;
 
 use std::char;
 //std
 use std::iter::{Iterator, Peekable};
 use std::str::CharIndices;
-use std::thread::current;
 
 //crate
 use crate::utility::peek::{self, Peek};
@@ -33,7 +30,6 @@ pub struct Lexer<'a> {
 }
 
 impl<'a> Lexer<'a> {
-<<<<<<< HEAD
     fn next(&mut self) -> Option<char> {
         let (i, c) = self.iter.next()?;
         self.cur = i;
@@ -100,24 +96,6 @@ impl<'a> Lexer<'a> {
         }
 
         tokens // gangsta nation
-=======
-    pub fn execute(self) -> Vec<Token<'a>> {
-        let mut lexemes = Vec::new();
-        let mut currentToken = Vec::new();
-
-        while (self.iter.peek(0) != None) {
-            let char = self.iter.peek(0);
-
-            if (char.is_whitespace() == false) {
-                currentToken.push(char);
-            } else {
-                lexemes.push(Lexeme::new(currentToken));
-                currentToken = Vec::new()
-            }
-        }
-
-        lexemes
->>>>>>> 255b7d04e841aa2658300a96a8df659f536ff0e2
     }
 
     pub fn new(source: &'a str) -> Lexer<'a> {
@@ -136,7 +114,6 @@ mod tests {
 
     #[test]
     fn test_lexer() {
-        let arr = [];
         let source = r#"local testicals true false 123 'string' "#;
 
         let lexer = Lexer::new(&source);
