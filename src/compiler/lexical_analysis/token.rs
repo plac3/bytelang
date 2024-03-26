@@ -1,7 +1,14 @@
 #[derive(Debug)]
 pub enum Token<'a> {
-    Plus, 
-    Minus,
+    Add, 
+    Subtract,
+    Multiply,
+    Divide,
+    Module,
+
+    Identifier,
+    Equal,
+    Name,
 
     Number(&'a str)
 }
